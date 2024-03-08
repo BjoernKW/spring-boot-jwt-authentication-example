@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/test")
+@RequestMapping("/api/content")
 @CrossOrigin(origins = "http://localhost:4200")
-public class TestController {
+class ContentController {
 
   @GetMapping("/public")
   public String publicAcces() {
-    return "Public Content.";
+    return "Public content.";
   }
 
   @GetMapping("/user")
   @PreAuthorize("hasRole('USER')")
   public String userAccess() {
-    return "User content.";
+    return "Now displaying restricted user content.";
   }
 }

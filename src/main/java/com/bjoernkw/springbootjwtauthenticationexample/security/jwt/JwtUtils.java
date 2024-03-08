@@ -20,10 +20,12 @@ public class JwtUtils {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtils.class);
 
-  @Value("${com.bjoernkw.spring-boot-jwt-authentication-example.jwtSecret}")
+  private static final String USERNAME_CLAIM = "username";
+
+  @Value("${com.bjoernkw.spring-boot-jwt-authentication-example.jwt-secret}")
   private String jwtSecret;
 
-  @Value("${com.bjoernkw.spring-boot-jwt-authentication-example.jwtExpiration}")
+  @Value("${com.bjoernkw.spring-boot-jwt-authentication-example.jwt-expiration}")
   private int jwtExpiration;
 
   public String generateJwtToken(Authentication authentication) {
@@ -31,6 +33,7 @@ public class JwtUtils {
 
     return Jwts.builder()
         .subject(userPrincipal.getUsername())
+        .claim(USERNAME_CLAIM, userPrincipal.getUsername())
         .issuedAt(new Date())
         .expiration(new Date((new Date()).getTime() + jwtExpiration))
         .signWith(key())
@@ -46,9 +49,9 @@ public class JwtUtils {
         .parser()
         .verifyWith(key())
         .build()
-        .parse(token)
+        .parseSignedClaims(token)
         .getPayload()
-        .toString();
+        .get(USERNAME_CLAIM, String.class);
   }
 
   public boolean validateJwtToken(String authToken) {

@@ -1,0 +1,18 @@
+### Sign in with valid credentials
+POST http://localhost:8080/api/authentication/sign-in
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "password"
+}
+
+### Try to sign in with invalid credentials
+POST http://localhost:8080/api/authentication/sign-in
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "invalid-password"
+}
+
