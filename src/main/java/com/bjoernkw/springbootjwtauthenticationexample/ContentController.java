@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 class ContentController {
 
   @GetMapping("/public")
-  public String publicAcces() {
+  public String publicAccess() {
     return "Public content.";
   }
 

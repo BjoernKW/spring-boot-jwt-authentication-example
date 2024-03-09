@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -36,11 +37,17 @@ class WebSecurityConfig {
         .cors(withDefaults())
         .csrf(AbstractHttpConfigurer::disable)
         .exceptionHandling(
-            exception -> exception.authenticationEntryPoint(authenticationEntryPoint)
+            exception ->
+                exception.authenticationEntryPoint(authenticationEntryPoint)
+        )
+        .sessionManagement(
+            session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )
         .authorizeHttpRequests(authorizeHttpRequestsCustomizer ->
             authorizeHttpRequestsCustomizer
                 .requestMatchers("/api/authentication/**").permitAll()
+                .requestMatchers("/api/content/public/**").permitAll()
                 .anyRequest().authenticated()
         )
         .userDetailsService(userDetailsService())
