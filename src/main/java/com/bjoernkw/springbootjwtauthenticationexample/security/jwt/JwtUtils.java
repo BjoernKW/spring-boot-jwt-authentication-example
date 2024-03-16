@@ -28,6 +28,10 @@ public class JwtUtils {
   @Value("${com.bjoernkw.spring-boot-jwt-authentication-example.jwt-expiration}")
   private int jwtExpiration;
 
+  private SecretKey key() {
+    return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+  }
+
   public String generateJwtToken(Authentication authentication) {
     UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
 
@@ -38,10 +42,6 @@ public class JwtUtils {
         .expiration(new Date((new Date()).getTime() + jwtExpiration))
         .signWith(key())
         .compact();
-  }
-
-  private SecretKey key() {
-    return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
   }
 
   public String getUserNameFromJwtToken(String token) {

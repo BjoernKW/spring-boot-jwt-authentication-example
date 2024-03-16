@@ -1,5 +1,6 @@
 package com.bjoernkw.springbootjwtauthenticationexample.security;
 
+import com.bjoernkw.springbootjwtauthenticationexample.security.jwt.JwtResponse;
 import com.bjoernkw.springbootjwtauthenticationexample.security.jwt.JwtUtils;
 import jakarta.validation.Valid;
 import java.util.List;

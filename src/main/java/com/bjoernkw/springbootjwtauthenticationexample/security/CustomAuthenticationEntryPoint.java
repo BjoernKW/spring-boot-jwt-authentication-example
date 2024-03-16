@@ -1,4 +1,4 @@
-package com.bjoernkw.springbootjwtauthenticationexample.security.jwt;
+package com.bjoernkw.springbootjwtauthenticationexample.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
