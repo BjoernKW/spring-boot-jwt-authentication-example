@@ -14,6 +14,10 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>spring-boot-jwt-authentication-example</name>
   <description>spring-boot-jwt-authentication-example</description>
+  <properties>
+    <java.version>21</java.version>
+    <jjwt.version>0.12.5</jjwt.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -74,10 +78,6 @@
       <scope>runtime</scope>
     </dependency>
   </dependencies>
-  <properties>
-    <java.version>21</java.version>
-    <jjwt.version>0.12.5</jjwt.version>
-  </properties>
 
   <build>
     <plugins>
